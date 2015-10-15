@@ -1,11 +1,55 @@
-var app = angular.module('angularBooks', ['ngResource']);
+var app = angular.module('angularBooks', ["ngRoute", "ngResource"]);
 
-angular.module('angularBooks').service('Book', function($resource) {
-	return $resource('http://daretodiscover.herokuapp.com/books/:id')
+app.config(function($routeProvider, $locationProvider) {
+	$routeProvider
+	.when('/', {
+		templateUrl: 'templates/books-index.html',
+		controller: 'BooksIndexCtrl'
+	})
+	.when('/books/:id', {
+		templateUrl: 'templates/books-show.html',
+		controller: 'BooksShowCtrl'
+	})
+
+	$locationProvider.html5Mode({
+		enabled: true,
+		requireBase: false
+	});
 })
 
-angular.controller('ResourceController', function($scope, Book) {
-	$scope.book = Book.get({id: 200}, function(data) {
+app.service("Book", function($resource) {
+	return $resource('http://daretodiscover.herokuapp.com/books/:id')
+});
+
+app.controller("ResourceController", function($scope, Book) {
+	// $scope.book = Book.get({ id: 1376 }, function(data) {
+ //      console.log(data);
+ //    }); // get() returns a single book
+
+ //    $scope.allBooks = Book.query(function(data) {
+ //      console.log(data);
+ //    }); //query() returns all the books
+
+    // add a new book
+    // $scope.newBook = {"title":"JavaScript: The Good Parts","author":"Douglas Crockford","image":"","release_date":"May 11, 2008"};
+
+    // Book.save($scope.newBook, function(data) {
+    //   console.log(data);
+    // });
+
+    // delete a book
+    // Book.delete({id:1388});
+})
+
+app.controller("BooksIndexCtrl", function($scope, Book) {
+	Book.query(function(data) {
+		$scope.books = data;
 		console.log(data);
 	})
 })
+
+app.controller("BooksShowCtrl", function($scope, Book) {
+	console.log('Show!');
+})
+
+

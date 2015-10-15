@@ -1,0 +1,20 @@
+<h1>Index</h1>
+<div ng-repeat="book in books" class="bookCard row">
+	<div class="col-lg-2">
+		<div class="img-wrapper">
+			<a ng-href="books/{{book.id}}"><img ng-src="{{book.image}}" class="bookImg"></a>
+		</div>
+	</div>
+	<div class="col-lg-10">
+		<h3>Title: {{book.title}}</h3>
+		<h3>Author: {{book.author}}</h3>
+		<h3>Released: {{book.release_date}}</h3>
+		<div class="button-wrapper">
+			<button ng-click="toggleEditForm()">Edit</button>
+			<button>Delete</button>
+		</div>
+		<div ng-show="show" class="ng-show">
+			test
+		</div>
+	</div>
+</div>

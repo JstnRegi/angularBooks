@@ -4,10 +4,27 @@
 	<meta charset="UTF-8">
 	<title>Angular Books</title>
 	<base href="/">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="public/css/main.css">
+
+	<!-- Bootstrap CDN -->
+  <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Bower Components -->
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+
+  <!-- App JS -->
+  <script src="app.js"></script>
+
+
 </head>
 <body>
-
+	<div ng-view>
+				
+	</div>
 </body>
 </html>
 
-<h1>Hello world!</h1>
