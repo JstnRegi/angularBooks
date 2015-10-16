@@ -18,7 +18,11 @@ app.config(function($routeProvider, $locationProvider) {
 })
 
 app.service("Book", function($resource) {
-	return $resource('http://daretodiscover.herokuapp.com/books/:id')
+	return $resource('http://daretodiscover.herokuapp.com/books/:id', {id: "@_id"} , {
+      update: {
+        method: 'PUT'
+      }
+  })
 });
 
 app.controller("ResourceController", function($scope, Book) {
@@ -42,9 +46,17 @@ app.controller("ResourceController", function($scope, Book) {
 })
 
 app.controller("BooksIndexCtrl", function($scope, Book) {
+	$scope.newBook = {}; 
 	Book.query(function(data) {
 		$scope.books = data;
-	})
+	});
+	$scope.updateBook = function(book) {
+		Book.get({id: book.id}, function() {
+			Book.update({id: book.id}, book);
+		})
+        // alert('attempt');
+     
+	}
 })
 
 app.controller("BooksShowCtrl", function($scope, Book, $routeParams) {
@@ -55,6 +67,7 @@ app.controller("BooksShowCtrl", function($scope, Book, $routeParams) {
 		$scope.book = response;
 	});
 });
+
 
 
 // app.controller('BooksShowCtrl', ['$scope', 'Book', '$routeParams', function ($scope, Book, $routeParams) {

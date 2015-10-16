@@ -1,4 +1,16 @@
 <h1>Index</h1>
+<div id="new-book-wrapper" class="row">
+	<button ng-init="toggleCreateForm=false" ng-click="toggleCreateForm = !toggleCreateForm">Edit</button>
+	<div ng-show="toggleCreateForm" class="ng-show">
+			<form action="/">
+				<input type="text" ng-model="book.title"><br>
+				<input type="text" ng-model="book.author"><br>
+				<input type="text" ng-model="book.release_date">
+				<input type="text" ng-model="book.image">
+				<button ng-submit="updateBook()">Submit Changes</button>
+			</form>
+	</div>
+</div>
 <div ng-repeat="book in books" class="bookCard row">
 	<div class="col-lg-2">
 		<div class="img-wrapper">
@@ -17,11 +29,11 @@
 			<button>Delete</button>
 		</div>
 		<div ng-show="toggleEditForm" class="ng-show">
-			<form action="/">
+			<form ng-submit="updateBook(book)">
 				<input type="text" ng-model="book.title"><br>
 				<input type="text" ng-model="book.author"><br>
 				<input type="text" ng-model="book.release_date">
-				<button type="submit">Submit Changes</button>
+				<button ng-click="toggleEditForm = !toggleEditForm" type="submit">Submit Change</button>
 			</form>
 		</div>
 	</div>
