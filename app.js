@@ -1,4 +1,4 @@
-var app = angular.module('angularBooks', ["ngRoute", "ngResource"]);
+var app = angular.module('angularBooks', ["ngResource", "ngRoute"]);
 
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider
@@ -44,12 +44,27 @@ app.controller("ResourceController", function($scope, Book) {
 app.controller("BooksIndexCtrl", function($scope, Book) {
 	Book.query(function(data) {
 		$scope.books = data;
-		console.log(data);
 	})
 })
 
-app.controller("BooksShowCtrl", function($scope, Book) {
-	console.log('Show!');
-})
+app.controller("BooksShowCtrl", function($scope, Book, $routeParams) {
+	
+	Book.get({id: $routeParams.id}, function(response) {
+		console.log({id: $routeParams.id});
+		console.log($routeParams.id);
+		$scope.book = response;
+	});
+});
 
+
+// app.controller('BooksShowCtrl', ['$scope', 'Book', '$routeParams', function ($scope, Book, $routeParams) {
+//   Book.get({id: $routeParams.id}, function(book) {
+//     $scope.book = book;
+//   });
+// ​
+//   $scope.updateBook = function(book){
+//   	Book.update({id: book.id}, book);
+//   	$scope.bookFormVisible=false;
+//   };
+// }]);
 
