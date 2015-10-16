@@ -10,11 +10,16 @@
 		<h3>Author: {{book.author}}</h3>
 		<h3>Released: {{book.release_date}}</h3>
 		<div class="button-wrapper">
-			<button ng-click="toggleEditForm()">Edit</button>
+			<button ng-init="toggleEditForm=false" ng-click="toggleEditForm = !toggleEditForm">Edit</button>
 			<button>Delete</button>
 		</div>
-		<div ng-show="show" class="ng-show">
-			test
+		<div ng-show="toggleEditForm" class="ng-show">
+			<form>
+				<input type="text" ng-model="book.title"><br>
+				<input type="text" ng-model="book.author"><br>
+				<input type="text" ng-model="book.release_date">
+				<button type="submit">Submit Changes</button>
+			</form>
 		</div>
 	</div>
 </div>
